@@ -5,9 +5,34 @@
 td, th {
   vertical-align: middle !important;
   text-align: center !important;
+  width: 180px;
 }
 
 td:first-of-type {
   height: 200px;
-  width: 250px;
+  width: 180px;
+}
+
+.city-stats-container div {
+  text-align: left;
+}
+
+.city-stats-container div:first-child {
+  float: none;
+  display: block;  
+}
+
+.city-stats-container div:nth-child(2) {
+  float: none;
+  display: block;
+}
+
+@media only screen and (min-width: 1200px) {
+  .city-stats-container div:first-child {
+    float: left;
+  }
+
+  .city-stats-container div:nth-child(2) {
+    float: right;
+  }
 }

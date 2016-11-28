@@ -14,3 +14,11 @@ ReactDOM.render(
     <App />
   </Provider>
   , document.querySelector('.container'));
+
+
+// fix map size bug
+// add in min, max, and median
+// store cities in local storage
+// ability to delete cities
+// create city detailed view with more information
+// add auth
