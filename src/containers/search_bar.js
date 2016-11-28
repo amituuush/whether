@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchWeather } from '../actions/index';
+import moment from 'moment';
+
+function date() {
+  return moment().add(5, 'days').format("LL");
+}
 
 class SearchBar extends Component {
   constructor(props) {
@@ -29,16 +34,19 @@ class SearchBar extends Component {
 
   render() {
     return (
-      <form onSubmit={this.onFormSubmit} className="input-group">
-        <input
-          placeholder="Get a five-day forecast in your favorite cities"
-          className="form-control"
-          value={this.state.term}
-          onChange={this.onInputChange} />
-          <span className="input-group-btn">
-            <button type="submit" className="btn btn-secondary">Submit</button>
-          </span>
-      </form>
+      <div>
+        <form onSubmit={this.onFormSubmit} className="input-group">
+          <input
+            placeholder="Get a five-day forecast in your favorite cities"
+            className="form-control"
+            value={this.state.term}
+            onChange={this.onInputChange} />
+            <span className="input-group-btn">
+              <button type="submit" className="btn btn-secondary">Submit</button>
+            </span>
+        </form>
+        <h4>Weather from: Today to {date()}</h4>
+      </div>
       );
   }
 }

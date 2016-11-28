@@ -1,3 +1,11 @@
+.app-container {
+  padding-top: 5em;
+}
+
+h1, h4 {
+  text-align: center;
+}
+
 .input-group {
   margin: 20px 0px;
 }
@@ -19,7 +27,7 @@ td:first-of-type {
 
 .city-stats-container div:first-child {
   float: none;
-  display: block;  
+  display: block;
 }
 
 .city-stats-container div:nth-child(2) {
