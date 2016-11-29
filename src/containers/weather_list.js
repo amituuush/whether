@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { changeShowCityModule } from '../actions/showCityModule';
-import Chart from '../components/chart';
-import GoogleMap from '../components/google_map';
+import { changeShowCityModule, deleteCity } from '../actions/showCityModule';
+import CityRow from '../components/city_row';
 
 class WeatherList extends Component {
 
@@ -11,11 +10,16 @@ class WeatherList extends Component {
     super(props);
 
     this.handleChangeShowCityModule = this.handleChangeShowCityModule.bind(this);
+    this.handleDeleteCity = this.handleDeleteCity.bind(this);
   }
 
   handleChangeShowCityModule() {
     console.log('yooo');
     this.props.changeShowCityModule();
+  }
+
+  handleDeleteCity() {
+    console.log('deleting city');
   }
 
   renderWeather(cityData) {
@@ -25,17 +29,30 @@ class WeatherList extends Component {
     const humidities = cityData.list.map(weather => weather.main.humidity);
     const { lon, lat } = cityData.city.coord;
 
-    return (
-      <tr onClick={() => this.handleChangeShowCityModule.bind(this)} key={name}>
-        <td><GoogleMap lon={lon} lat={lat} /></td>
-        <td><Chart data={temps} color="orange" units="°F" /></td>
-        <td><Chart data={pressures} color="green" units="hPa" /></td>
-        <td><Chart data={humidities} color="blue" units="%" /></td>
-      </tr>
-    );
+    // return (
+    //   <CityRow />
+    // );
+
+
+    // return (
+    //   <tr onClick={() => this.handleChangeShowCityModule.bind(this)} key={name}>
+    //     <td><GoogleMap lon={lon} lat={lat} /></td>
+    //     <td><Chart data={temps} color="orange" units="°F" /></td>
+    //     <td><Chart data={pressures} color="green" units="hPa" /></td>
+    //     <td><Chart data={humidities} color="blue" units="%" /></td>
+    //     <td><button onClick={this.handleDeleteCity}>Remove</button></td>
+    //   </tr>
+    // );
   }
 
   render() {
+
+    var cityRow = this.props.weather.map(function(city) {
+      return <CityRow
+              cityData={city}
+              key={city.city.name}/>
+    })
+
     return (
       <table className="table table-hover">
         <thead>
@@ -47,7 +64,8 @@ class WeatherList extends Component {
           </tr>
         </thead>
         <tbody>
-          {this.props.weather.map(this.renderWeather)}
+          {/* {this.props.weather.map(this.renderWeather)} */}
+          {cityRow}
         </tbody>
       </table>
     );
@@ -64,7 +82,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ changeShowCityModule }, dispatch);
+  return bindActionCreators({ changeShowCityModule, deleteCity }, dispatch);
 }
 
 export default connect (mapStateToProps, mapDispatchToProps)(WeatherList);
