@@ -51,6 +51,10 @@ class SearchBar extends Component {
   }
 }
 
+SearchBar.propTypes = {
+  fetchWeather: React.PropTypes.func
+}
+
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ fetchWeather }, dispatch);
 }

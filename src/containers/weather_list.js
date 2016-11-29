@@ -1,9 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { changeShowCityModule } from '../actions/showCityModule';
 import Chart from '../components/chart';
 import GoogleMap from '../components/google_map';
 
 class WeatherList extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.handleChangeShowCityModule = this.handleChangeShowCityModule.bind(this);
+  }
+
+  handleChangeShowCityModule() {
+    console.log('yooo');
+    this.props.changeShowCityModule();
+  }
 
   renderWeather(cityData) {
     const name = cityData.city.name;
@@ -13,7 +26,7 @@ class WeatherList extends Component {
     const { lon, lat } = cityData.city.coord;
 
     return (
-      <tr key={name}>
+      <tr onClick={() => this.handleChangeShowCityModule.bind(this)} key={name}>
         <td><GoogleMap lon={lon} lat={lat} /></td>
         <td><Chart data={temps} color="orange" units="°F" /></td>
         <td><Chart data={pressures} color="green" units="hPa" /></td>
@@ -41,8 +54,17 @@ class WeatherList extends Component {
   }
 }
 
+WeatherList.propType = {
+  weather: React.PropTypes.array,
+  changeShowCityModule: React.PropTypes.func
+}
+
 function mapStateToProps(state) {
   return { weather: state.weather };
 }
 
-export default connect (mapStateToProps)(WeatherList);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ changeShowCityModule }, dispatch);
+}
+
+export default connect (mapStateToProps, mapDispatchToProps)(WeatherList);
