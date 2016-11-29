@@ -77,13 +77,22 @@
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
+	var _localStorage = __webpack_require__(399);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	var persistedState = (0, _localStorage.loadState)();
+
 	var createStoreWithMiddleware = (0, _redux.applyMiddleware)(_reduxPromise2.default)(_redux.createStore);
+	var store = createStoreWithMiddleware(_reducers2.default, persistedState);
+
+	store.subscribe(function () {
+	  (0, _localStorage.saveState)(store.getState());
+	});
 
 	_reactDom2.default.render(_react2.default.createElement(
 	  _reactRedux.Provider,
-	  { store: createStoreWithMiddleware(_reducers2.default) },
+	  { store: store },
 	  _react2.default.createElement(_app2.default, null)
 	), document.querySelector('.container'));
 
@@ -57024,6 +57033,37 @@
 	};
 
 	var _showCityModule = __webpack_require__(347);
+
+/***/ },
+/* 399 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var loadState = exports.loadState = function loadState() {
+	  try {
+	    var serializedState = localStorage.getItem('state');
+	    if (serializedState === null) {
+	      return undefined;
+	    }
+	    return JSON.parse(serializedState);
+	  } catch (err) {
+	    return undefined;
+	  }
+	};
+
+	var saveState = exports.saveState = function saveState(state) {
+	  try {
+	    var serializedState = JSON.stringify(state);
+	    // console.log(serializedState);
+	    localStorage.setItem('state', serializedState);
+	  } catch (err) {
+	    console.log(err);
+	  }
+	};
 
 /***/ }
 /******/ ]);
