@@ -8,16 +8,11 @@ export default class CityRow extends Component {
     super(props);
 
     this.handleChangeShowCityModule = this.handleChangeShowCityModule.bind(this);
-    this.handleDeleteCity = this.handleDeleteCity.bind(this);
   }
 
   handleChangeShowCityModule() {
     console.log('yooo');
     this.props.changeShowCityModule();
-  }
-
-  handleDeleteCity() {
-    console.log('deleting city');
   }
 
   render() {
