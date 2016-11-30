@@ -36,8 +36,11 @@ export default class CityRow extends Component {
         <td><Chart data={temps} color="orange" units="°F" /></td>
         <td><Chart data={pressures} color="green" units="hPa" /></td>
         <td><Chart data={humidities} color="blue" units="%" /></td>
-        <td><button onClick={this.handleDeleteCity}>Remove</button></td>
       </tr>
   );
 }
+}
+
+CityRow.propTypes = {
+  changeShowCityModule: React.PropTypes.func
 }
