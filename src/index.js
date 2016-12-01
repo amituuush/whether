@@ -27,7 +27,7 @@ ReactDOM.render(
   , document.querySelector('.container'));
 
 
-// store cities in local storage
+
 // ability to delete cities
 // create city detailed view with more information
 // add auth

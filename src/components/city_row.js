@@ -11,13 +11,14 @@ export default class CityRow extends Component {
   }
 
   handleChangeShowCityModule() {
-    console.log('yooo');
     this.props.changeShowCityModule();
+    const id = this.props.cityData.city.id;
+    console.log(id);
   }
 
   render() {
     const cityData = this.props.cityData;
-    console.log(cityData);
+
     const name = cityData.city.name;
     const temps = _.map(cityData.list.map(weather => weather.main.temp), (temp) => temp * (9/5) - 459.67);
     const pressures = cityData.list.map(weather => weather.main.pressure);
