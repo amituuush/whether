@@ -18,13 +18,12 @@
 }
 
 .city-module {
-  width: 70%;
+  width: 90%;
   max-width: 35em;
   margin: 10em auto 0 auto;
-  height: 50%;
   background: #fff;
   border-radius: 15px;
-  padding: 1em;
+  padding: 2em 1em 3em 1em;
 }
 
 .city-name, .city-temp {

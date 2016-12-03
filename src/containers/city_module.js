@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { changeShowCityModule } from '../actions/showCityModule';
+import { deleteCity } from '../actions/index';
 import moment from 'moment';
 
 class CityModule extends Component {
@@ -9,12 +10,19 @@ class CityModule extends Component {
     super(props);
 
     this.handleChangeShowCityModule = this.handleChangeShowCityModule.bind(this);
+
+    this.handleDeleteCity = this.handleDeleteCity.bind(this);
   }
 
   handleChangeShowCityModule() {
     this.props.changeShowCityModule();
   }
 
+  handleDeleteCity() {
+    var cityId = this.props.selectedCity.data.id;
+    this.props.deleteCity(cityId);
+    this.handleChangeShowCityModule();
+  }
 
   render() {
 
@@ -44,7 +52,7 @@ class CityModule extends Component {
           </div>
         </div>
         <div className="city-button-container">
-          <button type="button" className="btn btn-default btn-close" onClick={this.handleChangeShowCityModule}>Close</button><button type="button" className="btn btn-default btn-delete">Delete</button>
+          <button type="button" className="btn btn-default btn-close" onClick={this.handleChangeShowCityModule}>Close</button><button type="button" className="btn btn-default btn-delete" onClick={this.handleDeleteCity}>Delete</button>
         </div>
       </div>;
     }
@@ -70,7 +78,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ changeShowCityModule }, dispatch);
+  return bindActionCreators({ changeShowCityModule, deleteCity }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CityModule);

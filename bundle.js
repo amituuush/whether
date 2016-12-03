@@ -35195,8 +35195,6 @@
 	var FORECAST_ROOT_URL = 'http://api.openweathermap.org/data/2.5/forecast?appid=' + API_KEY;
 	var CURRENT_ROOT_URL = 'http://api.openweathermap.org/data/2.5/weather?appid=' + API_KEY;
 
-	//http://api.openweathermap.org/data/2.5/weather?appid=9f8096150320ee489d53e2c5af546d53?id=2172797
-
 	function fetchWeather(city) {
 	  var url = FORECAST_ROOT_URL + '&q=' + city + ', us';
 	  var request = _axios2.default.get(url);
@@ -56987,6 +56985,8 @@
 
 	var _showCityModule = __webpack_require__(348);
 
+	var _index = __webpack_require__(210);
+
 	var _moment = __webpack_require__(236);
 
 	var _moment2 = _interopRequireDefault(_moment);
@@ -57008,6 +57008,8 @@
 	    var _this = _possibleConstructorReturn(this, (CityModule.__proto__ || Object.getPrototypeOf(CityModule)).call(this, props));
 
 	    _this.handleChangeShowCityModule = _this.handleChangeShowCityModule.bind(_this);
+
+	    _this.handleDeleteCity = _this.handleDeleteCity.bind(_this);
 	    return _this;
 	  }
 
@@ -57015,6 +57017,13 @@
 	    key: 'handleChangeShowCityModule',
 	    value: function handleChangeShowCityModule() {
 	      this.props.changeShowCityModule();
+	    }
+	  }, {
+	    key: 'handleDeleteCity',
+	    value: function handleDeleteCity() {
+	      var cityId = this.props.selectedCity.data.id;
+	      this.props.deleteCity(cityId);
+	      this.handleChangeShowCityModule();
 	    }
 	  }, {
 	    key: 'render',
@@ -57125,7 +57134,7 @@
 	            ),
 	            _react2.default.createElement(
 	              'button',
-	              { type: 'button', className: 'btn btn-default btn-delete' },
+	              { type: 'button', className: 'btn btn-default btn-delete', onClick: this.handleDeleteCity },
 	              'Delete'
 	            )
 	          )
@@ -57156,7 +57165,7 @@
 	}
 
 	function mapDispatchToProps(dispatch) {
-	  return (0, _redux.bindActionCreators)({ changeShowCityModule: _showCityModule.changeShowCityModule }, dispatch);
+	  return (0, _redux.bindActionCreators)({ changeShowCityModule: _showCityModule.changeShowCityModule, deleteCity: _index.deleteCity }, dispatch);
 	}
 
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(CityModule);
