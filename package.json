@@ -8,8 +8,7 @@
     "start": "node server.js",
     "postinstall": "webpack -p",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
-    "test:watch": "npm run test -- --watch",
-    
+    "test:watch": "npm run test -- --watch"
   },
   "author": "",
   "license": "ISC",
