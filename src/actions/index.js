@@ -8,7 +8,7 @@ const API_KEY = '9f8096150320ee489d53e2c5af546d53';
 const FORECAST_ROOT_URL = `http://api.openweathermap.org/data/2.5/forecast?appid=${API_KEY}`;
 const CURRENT_ROOT_URL = `http://api.openweathermap.org/data/2.5/weather?appid=${API_KEY}`;
 
-//http://api.openweathermap.org/data/2.5/forecast?appid=9f8096150320ee489d53e2c5af546d53&q=$dallas,%20us
+//http://api.openweathermap.org/data/2.5/weather?appid=9f8096150320ee489d53e2c5af546d53?id=2172797
 
 export function fetchWeather(city) {
   const url = `${FORECAST_ROOT_URL}&q=${city}, us`;
@@ -20,7 +20,7 @@ export function fetchWeather(city) {
   }
 }
 
-export function fetchCityHistory(cityId) {
+export function fetchCurrentWeather(cityId) {
   const url = `${CURRENT_ROOT_URL}&id=${cityId}`;
   const request = axios.get(url);
 

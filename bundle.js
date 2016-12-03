@@ -100,7 +100,6 @@
 	  _react2.default.createElement(_app2.default, null)
 	), document.querySelector('.container'));
 
-	// store cities in local storage
 	// ability to delete cities
 	// create city detailed view with more information
 	// add auth
@@ -35177,8 +35176,9 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.DELETE_CITY = exports.FETCH_WEATHER = undefined;
+	exports.FETCH_CITY_HISTORY = exports.DELETE_CITY = exports.FETCH_WEATHER = undefined;
 	exports.fetchWeather = fetchWeather;
+	exports.fetchCurrentWeather = fetchCurrentWeather;
 	exports.deleteCity = deleteCity;
 
 	var _axios = __webpack_require__(211);
@@ -35187,18 +35187,32 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var API_KEY = '9f8096150320ee489d53e2c5af546d53';
-	var ROOT_URL = 'http://api.openweathermap.org/data/2.5/forecast?appid=' + API_KEY;
-
 	var FETCH_WEATHER = exports.FETCH_WEATHER = 'FETCH_WEATHER';
 	var DELETE_CITY = exports.DELETE_CITY = 'DELETE_CITY';
+	var FETCH_CITY_HISTORY = exports.FETCH_CITY_HISTORY = 'FETCH_CITY_HISTORY';
+
+	var API_KEY = '9f8096150320ee489d53e2c5af546d53';
+	var FORECAST_ROOT_URL = 'http://api.openweathermap.org/data/2.5/forecast?appid=' + API_KEY;
+	var CURRENT_ROOT_URL = 'http://api.openweathermap.org/data/2.5/weather?appid=' + API_KEY;
+
+	//http://api.openweathermap.org/data/2.5/weather?appid=9f8096150320ee489d53e2c5af546d53?id=2172797
 
 	function fetchWeather(city) {
-	  var url = ROOT_URL + '&q=' + city + ', us';
+	  var url = FORECAST_ROOT_URL + '&q=' + city + ', us';
 	  var request = _axios2.default.get(url);
 
 	  return {
 	    type: FETCH_WEATHER,
+	    payload: request
+	  };
+	}
+
+	function fetchCurrentWeather(cityId) {
+	  var url = CURRENT_ROOT_URL + '&id=' + cityId;
+	  var request = _axios2.default.get(url);
+
+	  return {
+	    type: FETCH_CITY_HISTORY,
 	    payload: request
 	  };
 	}
@@ -51619,6 +51633,8 @@
 
 	var _showCityModule = __webpack_require__(348);
 
+	var _index = __webpack_require__(210);
+
 	var _city_row = __webpack_require__(349);
 
 	var _city_row2 = _interopRequireDefault(_city_row);
@@ -51634,69 +51650,23 @@
 	var WeatherList = function (_Component) {
 	  _inherits(WeatherList, _Component);
 
-	  function WeatherList(props) {
+	  function WeatherList() {
 	    _classCallCheck(this, WeatherList);
 
-	    var _this = _possibleConstructorReturn(this, (WeatherList.__proto__ || Object.getPrototypeOf(WeatherList)).call(this, props));
-
-	    _this.handleChangeShowCityModule = _this.handleChangeShowCityModule.bind(_this);
-	    _this.handleDeleteCity = _this.handleDeleteCity.bind(_this);
-	    return _this;
+	    return _possibleConstructorReturn(this, (WeatherList.__proto__ || Object.getPrototypeOf(WeatherList)).apply(this, arguments));
 	  }
 
 	  _createClass(WeatherList, [{
-	    key: 'handleChangeShowCityModule',
-	    value: function handleChangeShowCityModule() {
-	      console.log('yooo');
-	      this.props.changeShowCityModule();
-	    }
-	  }, {
-	    key: 'handleDeleteCity',
-	    value: function handleDeleteCity() {
-	      console.log('deleting city');
-	    }
-	  }, {
-	    key: 'renderWeather',
-	    value: function renderWeather(cityData) {
-	      var name = cityData.city.name;
-	      var temps = _.map(cityData.list.map(function (weather) {
-	        return weather.main.temp;
-	      }), function (temp) {
-	        return temp * (9 / 5) - 459.67;
-	      });
-	      var pressures = cityData.list.map(function (weather) {
-	        return weather.main.pressure;
-	      });
-	      var humidities = cityData.list.map(function (weather) {
-	        return weather.main.humidity;
-	      });
-	      var _cityData$city$coord = cityData.city.coord,
-	          lon = _cityData$city$coord.lon,
-	          lat = _cityData$city$coord.lat;
-
-	      // return (
-	      //   <CityRow />
-	      // );
-
-
-	      // return (
-	      //   <tr onClick={() => this.handleChangeShowCityModule.bind(this)} key={name}>
-	      //     <td><GoogleMap lon={lon} lat={lat} /></td>
-	      //     <td><Chart data={temps} color="orange" units="°F" /></td>
-	      //     <td><Chart data={pressures} color="green" units="hPa" /></td>
-	      //     <td><Chart data={humidities} color="blue" units="%" /></td>
-	      //     <td><button onClick={this.handleDeleteCity}>Remove</button></td>
-	      //   </tr>
-	      // );
-	    }
-	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var _this2 = this;
 
-	      var cityRow = this.props.weather.map(function (city) {
+	      var cityRow = this.props.weather.map(function (cityData) {
 	        return _react2.default.createElement(_city_row2.default, {
-	          cityData: city,
-	          key: city.city.name });
+	          cityData: cityData,
+	          changeShowCityModule: _this2.props.changeShowCityModule,
+	          fetchCurrentWeather: _this2.props.fetchCurrentWeather,
+	          key: cityData.city.name });
 	      });
 
 	      return _react2.default.createElement(
@@ -51742,17 +51712,21 @@
 	  return WeatherList;
 	}(_react.Component);
 
-	WeatherList.propType = {
+	WeatherList.propTypes = {
 	  weather: _react2.default.PropTypes.array,
 	  changeShowCityModule: _react2.default.PropTypes.func
 	};
 
+	// whatever is returned here will show up as props on WeatherList
 	function mapStateToProps(state) {
-	  return { weather: state.weather };
+	  return {
+	    weather: state.weather,
+	    selectedCity: state.selectedCity
+	  };
 	}
 
 	function mapDispatchToProps(dispatch) {
-	  return (0, _redux.bindActionCreators)({ changeShowCityModule: _showCityModule.changeShowCityModule, deleteCity: _showCityModule.deleteCity }, dispatch);
+	  return (0, _redux.bindActionCreators)({ changeShowCityModule: _showCityModule.changeShowCityModule, fetchCurrentWeather: _index.fetchCurrentWeather }, dispatch);
 	}
 
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(WeatherList);
@@ -51815,27 +51789,22 @@
 
 	    var _this = _possibleConstructorReturn(this, (CityRow.__proto__ || Object.getPrototypeOf(CityRow)).call(this, props));
 
-	    _this.handleChangeShowCityModule = _this.handleChangeShowCityModule.bind(_this);
-	    _this.handleDeleteCity = _this.handleDeleteCity.bind(_this);
+	    _this.handleSelectCityModule = _this.handleSelectCityModule.bind(_this);
 	    return _this;
 	  }
 
 	  _createClass(CityRow, [{
-	    key: 'handleChangeShowCityModule',
-	    value: function handleChangeShowCityModule() {
-	      console.log('yooo');
+	    key: 'handleSelectCityModule',
+	    value: function handleSelectCityModule() {
+	      var cityId = this.props.cityData.city.id;
+	      this.props.fetchCurrentWeather(cityId);
 	      this.props.changeShowCityModule();
-	    }
-	  }, {
-	    key: 'handleDeleteCity',
-	    value: function handleDeleteCity() {
-	      console.log('deleting city');
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
 	      var cityData = this.props.cityData;
-	      console.log(cityData);
+
 	      var name = cityData.city.name;
 	      var temps = _.map(cityData.list.map(function (weather) {
 	        return weather.main.temp;
@@ -51855,7 +51824,7 @@
 
 	      return _react2.default.createElement(
 	        'tr',
-	        { onClick: this.handleChangeShowCityModule, key: name },
+	        { className: 'city-row', onClick: this.handleSelectCityModule, key: name },
 	        _react2.default.createElement(
 	          'td',
 	          null,
@@ -51875,15 +51844,6 @@
 	          'td',
 	          null,
 	          _react2.default.createElement(_chart2.default, { data: humidities, color: 'blue', units: '%' })
-	        ),
-	        _react2.default.createElement(
-	          'td',
-	          null,
-	          _react2.default.createElement(
-	            'button',
-	            { onClick: this.handleDeleteCity },
-	            'Remove'
-	          )
 	        )
 	      );
 	    }
@@ -51893,6 +51853,13 @@
 	}(_react.Component);
 
 	exports.default = CityRow;
+
+
+	CityRow.propTypes = {
+	  cityData: _react2.default.PropTypes.object,
+	  changeShowCityModule: _react2.default.PropTypes.func,
+	  fetchCurrentWeather: _react2.default.PropTypes.func
+	};
 
 /***/ },
 /* 350 */
@@ -57048,10 +57015,9 @@
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        { className: this.props.showCityModule ? "city-module-container" : "city-module-container city-module-container-hide" },
-	        _react2.default.createElement(
+
+	      if (this.props.selectedCity === null) {
+	        var cityModule = _react2.default.createElement(
 	          'div',
 	          { className: 'city-module' },
 	          _react2.default.createElement(
@@ -57059,7 +57025,28 @@
 	            { onClick: this.handleChangeShowCityModule },
 	            'X'
 	          )
-	        )
+	        );
+	      } else {
+	        var selectedCityData = this.props.selectedCity.data;
+	        var temp = Math.round(selectedCityData.main.temp * (9 / 5) - 459.67);
+	        console.log(selectedCityData);
+	        var cityModule = _react2.default.createElement(
+	          'div',
+	          { className: 'city-module' },
+	          selectedCityData.name,
+	          temp,
+	          _react2.default.createElement(
+	            'button',
+	            { onClick: this.handleChangeShowCityModule },
+	            'X'
+	          )
+	        );
+	      }
+
+	      return _react2.default.createElement(
+	        'div',
+	        { className: this.props.showCityModule ? "city-module-container" : "city-module-container city-module-container-hide" },
+	        cityModule
 	      );
 	    }
 	  }]);
@@ -57073,7 +57060,10 @@
 	};
 
 	function mapStateToProps(state) {
-	  return { showCityModule: state.showCityModule };
+	  return {
+	    showCityModule: state.showCityModule,
+	    selectedCity: state.selectedCity
+	  };
 	}
 
 	function mapDispatchToProps(dispatch) {
@@ -57102,10 +57092,15 @@
 
 	var _reducer_show_city_module2 = _interopRequireDefault(_reducer_show_city_module);
 
+	var _reducer_selected_city = __webpack_require__(401);
+
+	var _reducer_selected_city2 = _interopRequireDefault(_reducer_selected_city);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var rootReducer = (0, _redux.combineReducers)({
 	  weather: _reducer_weather2.default,
+	  selectedCity: _reducer_selected_city2.default,
 	  showCityModule: _reducer_show_city_module2.default
 	});
 
@@ -57193,6 +57188,31 @@
 	    console.log(err);
 	  }
 	};
+
+/***/ },
+/* 401 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	exports.default = function () {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+	  var action = arguments[1];
+
+	  switch (action.type) {
+	    case _index.FETCH_CITY_HISTORY:
+	      console.log(action.payload);
+	      return action.payload;
+	    default:
+	      return state;
+	  }
+	};
+
+	var _index = __webpack_require__(210);
 
 /***/ }
 /******/ ]);

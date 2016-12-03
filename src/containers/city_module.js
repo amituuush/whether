@@ -16,11 +16,25 @@ class CityModule extends Component {
 
 
   render() {
+
+    if (this.props.selectedCity === null) {
+      var cityModule = <div className="city-module">
+        <button onClick={this.handleChangeShowCityModule}>X</button>
+      </div>;
+    } else {
+      const selectedCityData = this.props.selectedCity.data;
+      const temp = Math.round(selectedCityData.main.temp * (9/5) - 459.67);
+      console.log(selectedCityData);
+      var cityModule = <div className="city-module">
+        {selectedCityData.name}
+        {temp}
+        <button onClick={this.handleChangeShowCityModule}>X</button>
+      </div>;
+    }
+
     return (
       <div className={this.props.showCityModule ? "city-module-container" : "city-module-container city-module-container-hide"}>
-        <div className="city-module">
-          <button onClick={this.handleChangeShowCityModule}>X</button>
-        </div>
+        {cityModule}
       </div>
       );
   }
@@ -32,7 +46,10 @@ CityModule.propTypes = {
 }
 
 function mapStateToProps(state) {
-  return { showCityModule: state.showCityModule };
+  return {
+    showCityModule: state.showCityModule,
+    selectedCity: state.selectedCity
+  };
 }
 
 function mapDispatchToProps(dispatch) {

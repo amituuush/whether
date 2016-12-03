@@ -7,13 +7,13 @@ export default class CityRow extends Component {
   constructor(props) {
     super(props);
 
-    this.handleChangeShowCityModule = this.handleChangeShowCityModule.bind(this);
+    this.handleSelectCityModule = this.handleSelectCityModule.bind(this);
   }
 
-  handleChangeShowCityModule() {
+  handleSelectCityModule() {
+    const cityId = this.props.cityData.city.id;
+    this.props.fetchCurrentWeather(cityId);
     this.props.changeShowCityModule();
-    const id = this.props.cityData.city.id;
-    console.log(id);
   }
 
   render() {
@@ -27,7 +27,7 @@ export default class CityRow extends Component {
 
 
   return (
-      <tr onClick={this.handleChangeShowCityModule} key={name}>
+      <tr className="city-row" onClick={this.handleSelectCityModule} key={name}>
         <td><GoogleMap lon={lon} lat={lat} /></td>
         <td><Chart data={temps} color="orange" units="°F" /></td>
         <td><Chart data={pressures} color="green" units="hPa" /></td>
@@ -38,5 +38,7 @@ export default class CityRow extends Component {
 }
 
 CityRow.propTypes = {
-  changeShowCityModule: React.PropTypes.func
+  cityData: React.PropTypes.object,
+  changeShowCityModule: React.PropTypes.func,
+  fetchCurrentWeather: React.PropTypes.func
 }
