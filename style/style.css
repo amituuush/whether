@@ -19,14 +19,58 @@
 
 .city-module {
   width: 70%;
+  max-width: 35em;
   margin: 10em auto 0 auto;
   height: 50%;
   background: #fff;
   border-radius: 15px;
+  padding: 1em;
 }
 
-.city-module button {
+.city-name, .city-temp {
+  text-align: center;
+}
+
+.city-name {
+  font-size: 2em;
+}
+
+.city-temp {
+  font-size: 5em;
+}
+
+.city-metrics {
+  width: 25em;
+  margin: 1em auto 0 auto;
+}
+
+.city-metrics-col-1, .city-metrics-col-2 {
+  display: inline-block;
+  width: 12em;
+  vertical-align: top;
+}
+
+.city-metrics-col-2 {
+  margin-left: 1em;
+}
+
+.city-metrics p {
+  font-size: 1.25em;
+}
+
+.city-metrics span {
+  /*font-weight: bold;*/
+}
+
+.city-button-container {
+  width: 14em;
+  margin: 1em auto 0 auto;
+}
+
+.btn-delete {
   float: right;
+  background: #E06C75;
+  color: #fff;
 }
 
 h1, h4 {

@@ -56987,6 +56987,10 @@
 
 	var _showCityModule = __webpack_require__(348);
 
+	var _moment = __webpack_require__(236);
+
+	var _moment2 = _interopRequireDefault(_moment);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -57022,23 +57026,108 @@
 	          { className: 'city-module' },
 	          _react2.default.createElement(
 	            'button',
-	            { onClick: this.handleChangeShowCityModule },
-	            'X'
+	            { type: 'button', className: 'btn btn-default', onClick: this.handleChangeShowCityModule },
+	            'Close'
 	          )
 	        );
 	      } else {
+
 	        var selectedCityData = this.props.selectedCity.data;
 	        var temp = Math.round(selectedCityData.main.temp * (9 / 5) - 459.67);
 	        console.log(selectedCityData);
+	        var date = (0, _moment2.default)().format('llll');
+
 	        var cityModule = _react2.default.createElement(
 	          'div',
 	          { className: 'city-module' },
-	          selectedCityData.name,
-	          temp,
 	          _react2.default.createElement(
-	            'button',
-	            { onClick: this.handleChangeShowCityModule },
-	            'X'
+	            'div',
+	            { className: 'city-name' },
+	            selectedCityData.name,
+	            _react2.default.createElement('br', null),
+	            ' current weather for ',
+	            _react2.default.createElement('br', null),
+	            date
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'city-temp' },
+	            temp,
+	            '\xB0F'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'city-metrics' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'city-metrics-col-1' },
+	              _react2.default.createElement(
+	                'p',
+	                null,
+	                _react2.default.createElement(
+	                  'span',
+	                  null,
+	                  'Pressure:'
+	                ),
+	                ' ',
+	                selectedCityData.main.pressure,
+	                'hPa'
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                null,
+	                _react2.default.createElement(
+	                  'span',
+	                  null,
+	                  'Humidity:'
+	                ),
+	                ' ',
+	                selectedCityData.main.humidity,
+	                '%'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'city-metrics-col-2' },
+	              _react2.default.createElement(
+	                'p',
+	                null,
+	                _react2.default.createElement(
+	                  'span',
+	                  null,
+	                  'Cloudiness:'
+	                ),
+	                ' ',
+	                selectedCityData.clouds.all,
+	                '%'
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                null,
+	                _react2.default.createElement(
+	                  'span',
+	                  null,
+	                  'Wind speed:'
+	                ),
+	                ' ',
+	                selectedCityData.wind.speed,
+	                ' m/s'
+	              )
+	            )
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'city-button-container' },
+	            _react2.default.createElement(
+	              'button',
+	              { type: 'button', className: 'btn btn-default btn-close', onClick: this.handleChangeShowCityModule },
+	              'Close'
+	            ),
+	            _react2.default.createElement(
+	              'button',
+	              { type: 'button', className: 'btn btn-default btn-delete' },
+	              'Delete'
+	            )
 	          )
 	        );
 	      }
