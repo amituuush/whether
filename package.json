@@ -9,7 +9,7 @@
     "postinstall": "webpack -p",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
     "test:watch": "npm run test -- --watch",
-    "dev": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js"
+    
   },
   "author": "",
   "license": "ISC",
