@@ -39,20 +39,19 @@ class CityModule extends Component {
 
       var cityModule =
       <div className="city-module">
-        <div className="city-name">{selectedCityData.name}<br /> current weather for <br />{date}</div>
+        <div className="city-name"><b>{selectedCityData.name}</b><br /> current weather for <br />{date}</div>
         <div className="city-temp">{temp}°F</div>
         <div className="city-metrics">
           <div className="city-metrics-col-1">
-            <p><span>Pressure:</span> {selectedCityData.main.pressure}hPa</p>
-            <p><span>Humidity:</span> {selectedCityData.main.humidity}%</p>
+            <p><b>Pressure:</b> {selectedCityData.main.pressure}hPa</p>
+            <p><b>Humidity:</b> {selectedCityData.main.humidity}%</p>
+            <button type="button" className="btn btn-default btn-close" onClick={this.handleChangeShowCityModule}>Close</button>
           </div>
           <div className="city-metrics-col-2">
-            <p><span>Cloudiness:</span> {selectedCityData.clouds.all}%</p>
-            <p><span>Wind speed:</span> {selectedCityData.wind.speed} m/s</p>
+            <p><b>Cloudiness:</b> {selectedCityData.clouds.all}%</p>
+            <p><b>Wind speed:</b> {selectedCityData.wind.speed} m/s</p>
+            <button type="button" className="btn btn-default btn-delete" onClick={this.handleDeleteCity}>Delete</button>
           </div>
-        </div>
-        <div className="city-button-container">
-          <button type="button" className="btn btn-default btn-close" onClick={this.handleChangeShowCityModule}>Close</button><button type="button" className="btn btn-default btn-delete" onClick={this.handleDeleteCity}>Delete</button>
         </div>
       </div>;
     }

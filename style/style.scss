@@ -1,6 +1,28 @@
+.container {
+  margin: 0 0 0 0;
+  width: 100%;
+  padding: 0;
+}
+
 .app-container {
-  padding-top: 5em;
   overflow-y: hidden;
+
+  .app-content {
+    width: 90%;
+    margin: 3em auto 0 auto;
+    max-width: 1100px;
+  }
+}
+
+.nav-container {
+  width: 90%;
+  margin: 0 auto;
+  max-width: 1100px;
+}
+
+.input-group {
+  margin: 0 auto 4em auto !important;
+  max-width: 30em;
 }
 
 .city-module-container {
@@ -19,7 +41,7 @@
 
 .city-module {
   width: 90%;
-  max-width: 35em;
+  max-width: 27em;
   margin: 10em auto 0 auto;
   background: #fff;
   border-radius: 15px;
@@ -31,39 +53,57 @@
 }
 
 .city-name {
-  font-size: 2em;
+  font-size: 1.2em;
+  color: lighten(#000, 40%);
 }
 
 .city-temp {
-  font-size: 5em;
+  font-size: 4em;
 }
 
 .city-metrics {
-  width: 25em;
+  width: 100%;
   margin: 1em auto 0 auto;
+
+  p {
+    font-size: 1em;
+  }
 }
 
 .city-metrics-col-1, .city-metrics-col-2 {
   display: inline-block;
-  width: 12em;
+  // width: 12em;
   vertical-align: top;
 }
 
+.city-metrics-col-1 {
+  width: 45%;
+  margin-right: 20px;
+
+  p {
+    float: right;
+    text-align: left;
+  }
+
+  button {
+    float: right;
+    clear: both;
+  }
+}
+
 .city-metrics-col-2 {
-  margin-left: 1em;
+  width: 48%;
+  // margin-left: 1em;
+
+  button {
+    float: left;
+  }
 }
 
-.city-metrics p {
-  font-size: 1.25em;
-}
-
-.city-metrics span {
-  /*font-weight: bold;*/
-}
-
-.city-button-container {
-  width: 14em;
-  margin: 1em auto 0 auto;
+.city-metrics {
+  span {
+    // font-weight: bold;
+  }
 }
 
 .btn-delete {
