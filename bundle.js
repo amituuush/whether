@@ -75,11 +75,11 @@
 
 	var _app2 = _interopRequireDefault(_app);
 
-	var _reducers = __webpack_require__(401);
+	var _reducers = __webpack_require__(402);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
-	var _localStorage = __webpack_require__(405);
+	var _localStorage = __webpack_require__(406);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -35011,11 +35011,11 @@
 
 	var _city_module2 = _interopRequireDefault(_city_module);
 
-	var _NavBar = __webpack_require__(406);
+	var _NavBar = __webpack_require__(397);
 
 	var _NavBar2 = _interopRequireDefault(_NavBar);
 
-	var _style = __webpack_require__(397);
+	var _style = __webpack_require__(398);
 
 	var _style2 = _interopRequireDefault(_style);
 
@@ -57189,13 +57189,87 @@
 
 	'use strict';
 
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _react = __webpack_require__(2);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _style = __webpack_require__(398);
+
+	var _style2 = _interopRequireDefault(_style);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var NavBar = function NavBar() {
+	  return _react2.default.createElement(
+	    'nav',
+	    { className: 'navbar navbar-dark bg-primary navbar-full' },
+	    _react2.default.createElement(
+	      'div',
+	      { className: 'nav-container' },
+	      _react2.default.createElement(
+	        'a',
+	        { className: 'navbar-brand', href: '#' },
+	        'Whether'
+	      ),
+	      _react2.default.createElement(
+	        'ul',
+	        { className: 'nav navbar-nav' },
+	        _react2.default.createElement(
+	          'li',
+	          { className: 'nav-item active' },
+	          _react2.default.createElement(
+	            'a',
+	            { className: 'nav-link', href: '#' },
+	            'Home ',
+	            _react2.default.createElement(
+	              'span',
+	              { className: 'sr-only' },
+	              '(current)'
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'li',
+	          { className: 'nav-item' },
+	          _react2.default.createElement(
+	            'a',
+	            { className: 'nav-link', href: '#' },
+	            'News'
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'li',
+	          { className: 'nav-item' },
+	          _react2.default.createElement(
+	            'a',
+	            { className: 'nav-link', href: '#' },
+	            'More'
+	          )
+	        )
+	      )
+	    )
+	  );
+	};
+
+	exports.default = NavBar;
+
+/***/ },
+/* 398 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(398);
+	var content = __webpack_require__(399);
 	if (typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(400)(content, {});
+	var update = __webpack_require__(401)(content, {});
 	if (content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if (false) {
@@ -57214,10 +57288,10 @@
 	}
 
 /***/ },
-/* 398 */
+/* 399 */
 /***/ function(module, exports, __webpack_require__) {
 
-	exports = module.exports = __webpack_require__(399)();
+	exports = module.exports = __webpack_require__(400)();
 	// imports
 
 
@@ -57228,7 +57302,7 @@
 
 
 /***/ },
-/* 399 */
+/* 400 */
 /***/ function(module, exports) {
 
 	/*
@@ -57284,7 +57358,7 @@
 
 
 /***/ },
-/* 400 */
+/* 401 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -57536,7 +57610,7 @@
 
 
 /***/ },
-/* 401 */
+/* 402 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57547,15 +57621,15 @@
 
 	var _redux = __webpack_require__(167);
 
-	var _reducer_weather = __webpack_require__(402);
+	var _reducer_weather = __webpack_require__(403);
 
 	var _reducer_weather2 = _interopRequireDefault(_reducer_weather);
 
-	var _reducer_show_city_module = __webpack_require__(403);
+	var _reducer_show_city_module = __webpack_require__(404);
 
 	var _reducer_show_city_module2 = _interopRequireDefault(_reducer_show_city_module);
 
-	var _reducer_selected_city = __webpack_require__(404);
+	var _reducer_selected_city = __webpack_require__(405);
 
 	var _reducer_selected_city2 = _interopRequireDefault(_reducer_selected_city);
 
@@ -57570,7 +57644,7 @@
 	exports.default = rootReducer;
 
 /***/ },
-/* 402 */
+/* 403 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57599,7 +57673,7 @@
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 /***/ },
-/* 403 */
+/* 404 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57623,7 +57697,7 @@
 	var _showCityModule = __webpack_require__(348);
 
 /***/ },
-/* 404 */
+/* 405 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -57648,7 +57722,7 @@
 	var _index = __webpack_require__(210);
 
 /***/ },
-/* 405 */
+/* 406 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -57676,80 +57750,6 @@
 	    console.log(err);
 	  }
 	};
-
-/***/ },
-/* 406 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _react = __webpack_require__(2);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _style = __webpack_require__(397);
-
-	var _style2 = _interopRequireDefault(_style);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var NavBar = function NavBar() {
-	  return _react2.default.createElement(
-	    'nav',
-	    { className: 'navbar navbar-dark bg-primary navbar-full' },
-	    _react2.default.createElement(
-	      'div',
-	      { className: 'nav-container' },
-	      _react2.default.createElement(
-	        'a',
-	        { className: 'navbar-brand', href: '#' },
-	        'Whether'
-	      ),
-	      _react2.default.createElement(
-	        'ul',
-	        { className: 'nav navbar-nav' },
-	        _react2.default.createElement(
-	          'li',
-	          { className: 'nav-item active' },
-	          _react2.default.createElement(
-	            'a',
-	            { className: 'nav-link', href: '#' },
-	            'Home ',
-	            _react2.default.createElement(
-	              'span',
-	              { className: 'sr-only' },
-	              '(current)'
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'li',
-	          { className: 'nav-item' },
-	          _react2.default.createElement(
-	            'a',
-	            { className: 'nav-link', href: '#' },
-	            'News'
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'li',
-	          { className: 'nav-item' },
-	          _react2.default.createElement(
-	            'a',
-	            { className: 'nav-link', href: '#' },
-	            'More'
-	          )
-	        )
-	      )
-	    )
-	  );
-	};
-
-	exports.default = NavBar;
 
 /***/ }
 /******/ ]);
